@@ -1,0 +1,99 @@
+edition: 1.0.0 #  命令行YAML规范版本，遵循语义化版本（Semantic Versioning）规范
+name: ffmpeg-app-u5qk
+access: '{{access}}' #  秘钥别名
+
+vars:
+  region: cn-hangzhou
+  service:
+    name: FcOssFFmpeg
+    description: Scenarios that can be solved by OSS + FC
+    internetAccess: true
+    role: acs:ram::1694024725952210:role/fcffmpegrole
+  runtime: python3
+  timeout: 900
+  handler: index.handler
+
+services:
+  AudioConvert: #  服务名称
+    component: fc
+    props: #  组件的属性值
+      region: ${vars.region}
+      service: ${vars.service}
+      function:
+        name: AudioConvert
+        description: 音频格式转换器
+        runtime: ${vars.runtime}
+        codeUri: ./functions/audio_convert
+        handler: ${vars.handler}
+        memorySize: 1024
+        timeout: ${vars.timeout}
+
+  GetMediaMeta: #  服务名称
+    component: fc
+    props: #  组件的属性值
+      region: ${vars.region}
+      service: ${vars.service}
+      function:
+        name: GetMediaMeta
+        description: 获取音视频 meta
+        runtime: ${vars.runtime}
+        codeUri: ./functions/get_multimedia_meta
+        handler: ${vars.handler}
+        memorySize: 1024
+        timeout: ${vars.timeout}
+
+  GetDuration: #  服务名称
+    component: fc
+    props: #  组件的属性值
+      region: ${vars.region}
+      service: ${vars.service}
+      function:
+        name: GetDuration
+        description: 获取音视频时长
+        runtime: ${vars.runtime}
+        codeUri: ./functions/get_duration
+        handler: ${vars.handler}
+        memorySize: 1024
+        timeout: ${vars.timeout}
+
+  VideoGif: #  服务名称
+    component: fc
+    props: #  组件的属性值
+      region: ${vars.region}
+      service: ${vars.service}
+      function:
+        name: VideoGif
+        description: 功能强大的 video 提取为 gif 函数
+        runtime: ${vars.runtime}
+        codeUri: ./functions/video_gif
+        handler: ${vars.handler}
+        memorySize: 1024
+        timeout: ${vars.timeout}
+
+  GetSprites: #  服务名称
+    component: fc
+    props: #  组件的属性值
+      region: ${vars.region}
+      service: ${vars.service}
+      function:
+        name: GetSprites
+        description: 功能强大雪碧图制作函数
+        runtime: ${vars.runtime}
+        codeUri: ./functions/get_sprites
+        handler: ${vars.handler}
+        memorySize: 1024
+        timeout: ${vars.timeout}
+
+  VideoWatermark: #  服务名称
+    component: fc
+    props: #  组件的属性值
+      region: ${vars.region}
+      service: ${vars.service}
+      function:
+        name: VideoWatermark
+        description: 功能强大的视频添加水印功能
+        runtime: ${vars.runtime}
+        codeUri: ./functions/video_watermark
+        handler: ${vars.handler}
+        memorySize: 1024
+        timeout: ${vars.timeout}
